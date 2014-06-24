@@ -17,6 +17,8 @@ public class Floor extends Row {
         tiles = new Array<Tile>(MathUtils.ceil(screenWidth));
         this.regions = regions;
         createRow();
+        createRow();
+        createRow();
         rect = createRect(tiles);
     }
 }

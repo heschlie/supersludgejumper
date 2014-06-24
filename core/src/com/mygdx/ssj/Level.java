@@ -30,6 +30,7 @@ public class Level implements Screen {
     private AtlasRegion platEnd;
     private Player player;
     private ShapeRenderer sr;
+    private UI ui;
 
     public Level (OrthographicCamera camera, TextureAtlas atlas) {
         this.camera = camera;
@@ -51,6 +52,7 @@ public class Level implements Screen {
 
         player = new Player(atlas, this);
         sr = new ShapeRenderer();
+        ui = new UI(player, this, atlas);
     }
 
     public void update(float delta) {
@@ -95,20 +97,22 @@ public class Level implements Screen {
         }
         player.draw(batch);
         batch.end();
-        sr.begin(ShapeRenderer.ShapeType.Line);
-        sr.setColor(Color.MAGENTA);
-        for (Platform plat : platforms) {
-            sr.rect(plat.rect.getX(),
-                    plat.rect.getY(),
-                    plat.rect.getWidth(),
-                    plat.rect.getHeight());
-        }
-        sr.setColor(Color.RED);
-        sr.rect(floor.rect.getX(),
-                floor.rect.getY(),
-                floor.rect.getWidth(),
-                floor.rect.getHeight());
-        sr.end();
+//        sr.begin(ShapeRenderer.ShapeType.Line);
+//        sr.setColor(Color.MAGENTA);
+//        for (Platform plat : platforms) {
+//            sr.rect(plat.rect.getX(),
+//                    plat.rect.getY(),
+//                    plat.rect.getWidth(),
+//                    plat.rect.getHeight());
+//        }
+//        sr.setColor(Color.RED);
+//        sr.rect(floor.rect.getX(),
+//                floor.rect.getY(),
+//                floor.rect.getWidth(),
+//                floor.rect.getHeight());
+//        sr.end();
+        ui.update(delta);
+
     }
 
     @Override
@@ -139,5 +143,6 @@ public class Level implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
+        ui.dispose();
     }
 }

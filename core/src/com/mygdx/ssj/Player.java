@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -37,7 +38,7 @@ public class Player extends Sprite {
     public boolean goingUp = false;
     public movement movestate;
     private float time = 0f;
-    public int score;
+    public int score = 0;
 
     // Feet!
     public Array<Rectangle> feet = new Array<Rectangle>(2);
@@ -65,7 +66,7 @@ public class Player extends Sprite {
         jumpL = new TextureRegion(atlas.findRegion("p2_jump"));
         jumpL.flip(true, false);
         setRegion(standR);
-        setPosition(5, 1);
+        setPosition(7, 3);
         createFeet();
         movestate = movement.STOP;
     }
@@ -80,8 +81,16 @@ public class Player extends Sprite {
         feet.get(1).setPosition(getX() + getWidth() * .85f, getY() - .5f);
     }
 
+    public void jump() {
+        if (grounded) {
+            velocity.y = 15f;
+            grounded = false;
+        }
+    }
+
     public void update(float delta) {
         time += delta;
+        score = Math.max(MathUtils.floor(getY() / 10f), score);
         setFeet();
 
         if (velocity.y > 0 && !goingUp) {
@@ -91,16 +100,15 @@ public class Player extends Sprite {
         }
 
         //player movement on keyboard for debugging
-        movestate = movement.STOP;
+        //movestate = movement.STOP;
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             movestate = movement.LEFT;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             movestate = movement.RIGHT;
         }
-        if (grounded && Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            velocity.y = 15f;
-            grounded = false;
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            jump();
         }
 
         move(delta);
@@ -132,6 +140,8 @@ public class Player extends Sprite {
                 }
                 break;
         }
+        if (!grounded && direction.equals(left)) setRegion(jumpL);
+        if (!grounded && direction.equals(right)) setRegion(jumpR);
         velocity.y += gravity * delta;
 
         if (velocity.y < terminalVelocity) velocity.y = terminalVelocity;
@@ -162,13 +172,16 @@ public class Player extends Sprite {
                     break;
                 }
             }
+            if (feet.get(i).overlaps(level.floor.rect)) {
+                feetTouching[i] = true;
+            }
             if (!feetTouching[0] && !feetTouching[1]) {
                 grounded = false;
             }
         }
 
-        if (getBoundingRectangle().overlaps(level.floor.rect) && getY() < 1) {
-            setY(1);
+        if (getBoundingRectangle().overlaps(level.floor.rect) && getY() < 3) {
+            setY(3);
             velocity.y = 0;
             grounded = true;
         }
