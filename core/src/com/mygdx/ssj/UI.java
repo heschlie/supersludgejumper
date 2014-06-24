@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.utils.StringBuilder
+import com.badlogic.gdx.utils.StringBuilder;
 
 /**
  * Created by heschlie on 6/23/2014. Copyright under Iridium Flare Games LLC.
