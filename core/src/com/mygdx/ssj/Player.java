@@ -84,7 +84,7 @@ public class Player extends Sprite {
     }
 
     public void jump() {
-        if (grounded) {
+        if (true) {
             velocity.y = 15f;
             grounded = false;
         }

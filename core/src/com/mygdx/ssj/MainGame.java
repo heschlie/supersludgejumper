@@ -11,19 +11,22 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
  */
 public class MainGame extends Game {
     private Level level;
-    public TextureAtlas atlas;
+    public static TextureAtlas atlas;
     public OrthographicCamera camera;
     public static final float screenWidth = 15f;
     public static final float screenHeight = screenWidth * 1.77f;
 
     @Override
     public void create() {
+        Row.lastPlatform = 4;
+        Row.lastRow = 0;
         atlas = new TextureAtlas(Gdx.files.internal("ssj.atlas"));
         camera = new OrthographicCamera(screenWidth, screenHeight);
         camera.position.set(screenWidth / 2f, screenHeight / 2f, 0);
         camera.update();
-        level = new Level(camera, atlas);
-        setScreen(level);
+        if (level == null)
+            level = new Level(camera, atlas);
+            setScreen(level);
     }
 
     @Override

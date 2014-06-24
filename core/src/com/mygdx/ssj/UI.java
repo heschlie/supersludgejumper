@@ -126,7 +126,7 @@ public class UI {
         statsTable.add(sludgeSpeed);
 
         // Setup table
-        table.row().height(screenHeight * .05f);
+        table.row().height(screenHeight * .1f);
         table.add().width(screenWidth * .25f);
         table.add().expandX();
         table.add().width(screenWidth * .25f);
