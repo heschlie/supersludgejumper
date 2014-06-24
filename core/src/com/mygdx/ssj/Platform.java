@@ -31,9 +31,6 @@ public class Platform extends Row {
         platWidth = MathUtils.random(1, 5);
         startX = MathUtils.random(0, MathUtils.ceil(screenWidth - 1)) - platWidth;
         startY = MathUtils.random(3, 8) + lastPlatform;
-//        System.out.println("X: " + startX);
-//        System.out.println("Y: " + startY);
-//        System.out.println("L: " + platWidth);
         tiles.add(new Tile(platStart, startX, startY));
         for (int i = startX + 1; i < platWidth + startX; i++) {
             tiles.add(new Tile(regions.random(), i, startY));

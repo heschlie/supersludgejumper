@@ -47,7 +47,6 @@ public class Level implements Screen {
         }
         while (Row.lastPlatform < camera.viewportHeight) {
             platforms.add(new Platform(platformTextures, platStart, platEnd, camera.viewportWidth));
-            System.out.println(Row.lastPlatform);
         }
 
         player = new Player(atlas, this);
