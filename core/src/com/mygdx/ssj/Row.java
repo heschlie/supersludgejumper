@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.Array;
  */
 public class Row {
     public static int lastRow = 0;
-    public static int lastPlatform = 2;
+    public static float lastPlatform = 4;
     public Array<Tile> tiles;
     protected Array<TextureRegion> regions;
     protected float screenWidth;

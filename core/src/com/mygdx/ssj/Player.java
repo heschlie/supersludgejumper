@@ -39,6 +39,8 @@ public class Player extends Sprite {
     public movement movestate;
     private float time = 0f;
     public int score = 0;
+    private float fixedDelta = 0f;
+
 
     // Feet!
     public Array<Rectangle> feet = new Array<Rectangle>(2);
@@ -110,11 +112,12 @@ public class Player extends Sprite {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
             jump();
         }
-
-        move(delta);
+        fixedDelta = (delta > 1/30f) ? 1/30f : delta;
+        move(fixedDelta);
     }
 
     public void move(float delta) {
+
         switch (movestate) {
             case LEFT:
                 velocity.x -= 1.5f;
@@ -160,10 +163,11 @@ public class Player extends Sprite {
 
         feetTouching[0] = false;
         feetTouching[1] = false;
-        for (int i = 0; i < feetTouching.length && !feetTouching[0] && !feetTouching[1]; i++) {
+        for (int i = 0; i < feetTouching.length; i++) {
             for (Platform platform : level.platforms) {
                 if (feet.get(i).overlaps(platform.rect)) {
                     feetTouching[i] = true;
+                    System.out.println(i);
                     if (getY() > platform.rect.getY() + platform.rect.getHeight() && !goingUp &&
                             getBoundingRectangle().setPosition(getX() + velocity.x * delta, getY() + velocity.y * delta).overlaps(platform.rect)) {
                         setY(platform.rect.getY() + platform.rect.getHeight());
@@ -175,9 +179,11 @@ public class Player extends Sprite {
             if (feet.get(i).overlaps(level.floor.rect)) {
                 feetTouching[i] = true;
             }
-            if (!feetTouching[0] && !feetTouching[1]) {
-                grounded = false;
-            }
+        }
+
+        // If neither foot touched anything, we're no longer grounded
+        if (!feetTouching[0] && !feetTouching[1]) {
+            grounded = false;
         }
 
         if (getBoundingRectangle().overlaps(level.floor.rect) && getY() < 3) {

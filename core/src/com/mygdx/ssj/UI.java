@@ -2,7 +2,6 @@ package com.mygdx.ssj;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -12,10 +11,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.StringBuilder;
+import com.badlogic.gdx.utils.Timer;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 /**
  * Created by heschlie on 6/23/2014. Copyright under Iridium Flare Games LLC.
@@ -34,14 +36,20 @@ public class UI {
     private TextureRegionDrawable rightButtonImage;
     private TextureRegionDrawable jumpButtonImage;
     private Label score;
+    private Label averageSpeed;
     private FreeTypeFontGenerator generator;
     private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
-    private BitmapFont font;
+    private BitmapFont fontBig;
+    private BitmapFont fontMed;
+    private BitmapFont fontSmall;
     private StringBuilder builder;
     private float screenWidth, screenHeight;
     private MyTouchListener touchListener = new MyTouchListener();
+    private float speed = 0f;
+    private Array<Float> speedTracker = new Array<Float>();
+    private DecimalFormat df = new DecimalFormat("##.##");
 
-    public UI(Player player, Level level, TextureAtlas atlas) {
+    public UI(final Player player, Level level, TextureAtlas atlas) {
         this.player = player;
         this.level = level;
         this.atlas = atlas;
@@ -65,12 +73,41 @@ public class UI {
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("kenvector_future.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = MathUtils.ceil(screenWidth * .03f);
-        font = generator.generateFont(parameter);
 
-        score = new Label("", new Label.LabelStyle(font, Color.BLACK));
+        parameter.size = MathUtils.ceil(screenWidth * .03f);
+        fontBig = generator.generateFont(parameter);
+        parameter.size = MathUtils.ceil(screenWidth * .02f);
+        fontMed = generator.generateFont(parameter);
+        parameter.size = MathUtils.ceil(screenWidth * .01f);
+        fontSmall = generator.generateFont(parameter);
+
+        score = new Label("", new Label.LabelStyle(fontBig, Color.BLACK));
         score.setAlignment(Align.right);
+
+        averageSpeed = new Label("", new Label.LabelStyle(fontMed, Color.BLACK));
+        averageSpeed.setAlignment(Align.center);
+
+        df.setRoundingMode(RoundingMode.UP);
+
         init();
+
+        Timer.schedule(new Timer.Task() {
+            private float average;
+
+            @Override
+            public void run() {
+                speedTracker.add(player.velocity.y);
+                average = 0f;
+                for (float vel : speedTracker) {
+                    average += vel;
+                }
+                average = average / speedTracker.size;
+                if (speedTracker.size == 16)
+                    speedTracker.removeIndex(15);
+
+                speed = average;
+            }
+        }, 1f, 1f);
     }
 
     private void init() {
@@ -90,7 +127,7 @@ public class UI {
         table.add(score).top().right().width(screenWidth * .25f);
         table.row();
         table.add(buttonTable);
-        table.add();
+        table.add(averageSpeed);
         table.add(jumpButton).bottom().right().size(screenWidth * .17f, screenWidth * .17f);
 
         // Button actions
@@ -104,6 +141,11 @@ public class UI {
         builder.setLength(0);
         builder.append("Score\n").append(player.score);
         score.setText(builder);
+
+        builder.setLength(0);
+        builder.append("Speed: ").append(df.format(speed)).append("m/s");
+        averageSpeed.setText(builder);
+
         stage.act(delta);
         stage.draw();
 //        table.drawDebug(stage);
@@ -113,11 +155,9 @@ public class UI {
         @Override
         public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
             if (event.getTarget() == leftButton) {
-                System.out.println("left");
                 player.movestate = Player.movement.LEFT;
             }
             if (event.getTarget() == rightButton) {
-                System.out.println("right");
                 player.movestate = Player.movement.RIGHT;
             }
             if (event.getTarget() == jumpButton) {
@@ -139,6 +179,6 @@ public class UI {
 
     public void dispose() {
         generator.dispose();
-        font.dispose();
+        fontBig.dispose();
     }
 }

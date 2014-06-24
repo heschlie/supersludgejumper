@@ -53,6 +53,20 @@ leftButton
   orig: 80, 80
   offset: 0, 0
   index: -1
+liquidLava
+  rotate: false
+  xy: 747, 93
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+liquidLavaTop
+  rotate: false
+  xy: 819, 93
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
 p2_jump
   rotate: false
   xy: 361, 45
@@ -146,35 +160,35 @@ p2_walk
   index: 10
 platform
   rotate: false
-  xy: 891, 93
+  xy: 505, 83
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: 0
 platform
   rotate: false
-  xy: 433, 83
+  xy: 577, 83
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: 1
 platform
   rotate: false
-  xy: 505, 83
+  xy: 429, 11
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: 2
 platformEnd
   rotate: false
-  xy: 747, 93
+  xy: 891, 93
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: -1
 platformStart
   rotate: false
-  xy: 819, 93
+  xy: 433, 83
   size: 70, 70
   orig: 70, 70
   offset: 0, 0

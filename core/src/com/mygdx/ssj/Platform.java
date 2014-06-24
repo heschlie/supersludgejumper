@@ -12,7 +12,7 @@ public class Platform extends Row {
     private TextureRegion platStart;
     private TextureRegion platEnd;
     private int startX;
-    private int startY;
+    private float startY;
     private int platWidth;
     public Rectangle rect;
 
@@ -29,8 +29,8 @@ public class Platform extends Row {
     @Override
     public void createRow() {
         platWidth = MathUtils.random(1, 5);
-        startX = MathUtils.random(0, MathUtils.ceil(screenWidth - 1)) - platWidth;
-        startY = MathUtils.random(3, 8) + lastPlatform;
+        startX = MathUtils.random(0, MathUtils.ceil(screenWidth)) - platWidth;
+        startY = MathUtils.random(300, 800) * .01f + lastPlatform;
         tiles.add(new Tile(platStart, startX, startY));
         for (int i = startX + 1; i < platWidth + startX; i++) {
             tiles.add(new Tile(regions.random(), i, startY));

@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -97,20 +98,25 @@ public class Level implements Screen {
         }
         player.draw(batch);
         batch.end();
-//        sr.begin(ShapeRenderer.ShapeType.Line);
-//        sr.setColor(Color.MAGENTA);
-//        for (Platform plat : platforms) {
-//            sr.rect(plat.rect.getX(),
-//                    plat.rect.getY(),
-//                    plat.rect.getWidth(),
-//                    plat.rect.getHeight());
-//        }
+        sr.begin(ShapeRenderer.ShapeType.Line);
+        sr.setColor(Color.RED);
+        for (Rectangle foot :player.feet) {
+            sr.rect(foot.x, foot.y,
+            foot.width, foot.height);
+        }
+        sr.setColor(Color.MAGENTA);
+        for (Platform plat : platforms) {
+            sr.rect(plat.rect.getX(),
+                    plat.rect.getY(),
+                    plat.rect.getWidth(),
+                    plat.rect.getHeight());
+        }
 //        sr.setColor(Color.RED);
 //        sr.rect(floor.rect.getX(),
 //                floor.rect.getY(),
 //                floor.rect.getWidth(),
 //                floor.rect.getHeight());
-//        sr.end();
+        sr.end();
         ui.update(delta);
 
     }
