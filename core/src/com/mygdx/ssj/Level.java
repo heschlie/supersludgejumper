@@ -148,7 +148,7 @@ public class Level implements Screen {
 
     @Override
     public void resume() {
-
+        batch = new SpriteBatch();
     }
 
     @Override

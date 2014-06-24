@@ -49,6 +49,7 @@ public class MainGame extends Game {
     @Override
     public void resume() {
         super.resume();
+        atlas = new TextureAtlas(Gdx.files.internal("ssj.atlas"));
     }
 
     @Override

@@ -167,7 +167,6 @@ public class Player extends Sprite {
             for (Platform platform : level.platforms) {
                 if (feet.get(i).overlaps(platform.rect)) {
                     feetTouching[i] = true;
-                    System.out.println(i);
                     if (getY() > platform.rect.getY() + platform.rect.getHeight() && !goingUp &&
                             getBoundingRectangle().setPosition(getX() + velocity.x * delta, getY() + velocity.y * delta).overlaps(platform.rect)) {
                         setY(platform.rect.getY() + platform.rect.getHeight());
