@@ -15,6 +15,4 @@ public class Wall extends Row {
         this.regions = regions;
         createRow();
     }
-
-
 }

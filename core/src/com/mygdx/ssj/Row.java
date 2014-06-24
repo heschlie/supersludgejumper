@@ -2,7 +2,6 @@ package com.mygdx.ssj;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
@@ -19,8 +18,10 @@ public class Row {
     protected float screenWidth;
 
     protected class Tile extends Sprite {
+        public float startX;
 
         public Tile(TextureRegion region, float x, float y) {
+            startX = x;
             setRegion(region);
             setSize(1, 1);
             setPosition(x, y);

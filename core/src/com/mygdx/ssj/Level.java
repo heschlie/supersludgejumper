@@ -32,11 +32,13 @@ public class Level implements Screen {
     private Player player;
     private ShapeRenderer sr;
     private UI ui;
+    public Sludge sludge;
 
     public Level (OrthographicCamera camera, TextureAtlas atlas) {
         this.camera = camera;
         this.atlas = atlas;
         batch = new SpriteBatch();
+        batch.enableBlending();
 
         platformTextures = convertRegions(atlas.findRegions("platform"));
         wallTextures = convertRegions(atlas.findRegions("houseDark"));
@@ -52,6 +54,7 @@ public class Level implements Screen {
         }
 
         player = new Player(atlas, this);
+        sludge = new Sludge(atlas.findRegion("liquidLavaTop"), atlas.findRegion("liquidLava"));
         sr = new ShapeRenderer();
         ui = new UI(player, this, atlas);
     }
@@ -69,6 +72,7 @@ public class Level implements Screen {
         if (player.getY() > camera.viewportHeight * .5f) {
             camera.position.y = player.getY();
         }
+        sludge.update(delta);
 
         camera.update();
     }
@@ -97,20 +101,21 @@ public class Level implements Screen {
             platform.draw(batch);
         }
         player.draw(batch);
+        sludge.draw(batch);
         batch.end();
         sr.begin(ShapeRenderer.ShapeType.Line);
-        sr.setColor(Color.RED);
-        for (Rectangle foot :player.feet) {
-            sr.rect(foot.x, foot.y,
-            foot.width, foot.height);
-        }
-        sr.setColor(Color.MAGENTA);
-        for (Platform plat : platforms) {
-            sr.rect(plat.rect.getX(),
-                    plat.rect.getY(),
-                    plat.rect.getWidth(),
-                    plat.rect.getHeight());
-        }
+//        sr.setColor(Color.RED);
+//        for (Rectangle foot :player.feet) {
+//            sr.rect(foot.x, foot.y,
+//            foot.width, foot.height);
+//        }
+//        sr.setColor(Color.MAGENTA);
+//        for (Platform plat : platforms) {
+//            sr.rect(plat.rect.getX(),
+//                    plat.rect.getY(),
+//                    plat.rect.getWidth(),
+//                    plat.rect.getHeight());
+//        }
 //        sr.setColor(Color.RED);
 //        sr.rect(floor.rect.getX(),
 //                floor.rect.getY(),

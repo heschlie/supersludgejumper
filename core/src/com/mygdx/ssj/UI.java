@@ -29,6 +29,7 @@ public class UI {
     private Stage stage;
     private Table table;
     private Table buttonTable;
+    private Table statsTable;
     private Button leftButton;
     private Button rightButton;
     private Button jumpButton;
@@ -37,6 +38,7 @@ public class UI {
     private TextureRegionDrawable jumpButtonImage;
     private Label score;
     private Label averageSpeed;
+    private Label sludgeSpeed;
     private FreeTypeFontGenerator generator;
     private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     private BitmapFont fontBig;
@@ -66,6 +68,7 @@ public class UI {
         table = new Table();
         table.debug();
         buttonTable = new Table();
+        statsTable = new Table();
 
         leftButton = new Button(leftButtonImage);
         rightButton = new Button(rightButtonImage);
@@ -86,6 +89,8 @@ public class UI {
 
         averageSpeed = new Label("", new Label.LabelStyle(fontMed, Color.BLACK));
         averageSpeed.setAlignment(Align.center);
+
+        sludgeSpeed = new Label("", new Label.LabelStyle(fontMed, Color.BLACK));
 
         df.setRoundingMode(RoundingMode.UP);
 
@@ -116,6 +121,10 @@ public class UI {
         buttonTable.add(leftButton).size(screenWidth * .17f, screenWidth * .17f);
         buttonTable.add(rightButton).size(screenWidth * .17f, screenWidth * .17f);
 
+        statsTable.add(averageSpeed);
+        statsTable.row();
+        statsTable.add(sludgeSpeed);
+
         // Setup table
         table.row().height(screenHeight * .05f);
         table.add().width(screenWidth * .25f);
@@ -127,7 +136,7 @@ public class UI {
         table.add(score).top().right().width(screenWidth * .25f);
         table.row();
         table.add(buttonTable);
-        table.add(averageSpeed);
+        table.add(statsTable);
         table.add(jumpButton).bottom().right().size(screenWidth * .17f, screenWidth * .17f);
 
         // Button actions
@@ -145,6 +154,10 @@ public class UI {
         builder.setLength(0);
         builder.append("Speed: ").append(df.format(speed)).append("m/s");
         averageSpeed.setText(builder);
+
+        builder.setLength(0);
+        builder.append("Sludge: ").append(df.format(level.sludge.speed)).append("m/s");
+        sludgeSpeed.setText(builder);
 
         stage.act(delta);
         stage.draw();
