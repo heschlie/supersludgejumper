@@ -1,4 +1,4 @@
-supersludgejumper
+Super Sludge Jumper!
 =================
 
 Endless vertical platformer where you are trying to escape a facility poorly run by managment 
