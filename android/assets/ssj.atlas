@@ -1,5 +1,6 @@
 
 ssj.png
+size: 962,236
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -19,25 +20,39 @@ flyDead
   index: -1
 houseDark
   rotate: false
-  xy: 502, 166
+  xy: 748, 166
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: 0
 houseDark
   rotate: false
-  xy: 574, 166
+  xy: 820, 166
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: 1
 houseDark
   rotate: false
-  xy: 646, 166
+  xy: 892, 166
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: 2
+jumpButton
+  rotate: false
+  xy: 434, 156
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+leftButton
+  rotate: false
+  xy: 516, 156
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
 p2_jump
   rotate: false
   xy: 362, 46
@@ -47,7 +62,7 @@ p2_jump
   index: 0
 p2_stand
   rotate: false
-  xy: 434, 144
+  xy: 680, 144
   size: 66, 92
   orig: 66, 92
   offset: 0, 0
@@ -129,38 +144,45 @@ p2_walk
   orig: 70, 94
   offset: 0, 0
   index: 10
-platformStart
-  rotate: false
-  xy: 718, 166
-  size: 70, 70
-  orig: 70, 70
-  offset: 0, 0
-  index: -1
-platformEnd
-  rotate: false
-  xy: 790, 166
-  size: 70, 70
-  orig: 70, 70
-  offset: 0, 0
-  index: -1
 platform
   rotate: false
-  xy: 862, 166
+  xy: 892, 94
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: 0
 platform
   rotate: false
-  xy: 934, 166
+  xy: 434, 84
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: 1
 platform
   rotate: false
-  xy: 502, 94
+  xy: 506, 84
   size: 70, 70
   orig: 70, 70
   offset: 0, 0
   index: 2
+platformEnd
+  rotate: false
+  xy: 748, 94
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+platformStart
+  rotate: false
+  xy: 820, 94
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+rightButton
+  rotate: false
+  xy: 598, 156
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1

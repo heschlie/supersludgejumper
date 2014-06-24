@@ -37,6 +37,7 @@ public class Player extends Sprite {
     public boolean goingUp = false;
     public movement movestate;
     private float time = 0f;
+    public int score;
 
     // Feet!
     public Array<Rectangle> feet = new Array<Rectangle>(2);

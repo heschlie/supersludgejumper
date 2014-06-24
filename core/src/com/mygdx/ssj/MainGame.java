@@ -14,8 +14,8 @@ public class MainGame extends Game {
     private Level level;
     public TextureAtlas atlas;
     public OrthographicCamera camera;
-    public float screenWidth = 15f;
-    public float screenHeight = screenWidth * 1.77f;
+    public static final float screenWidth = 15f;
+    public static final float screenHeight = screenWidth * 1.77f;
 
     @Override
     public void create() {
