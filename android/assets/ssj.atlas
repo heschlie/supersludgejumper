@@ -1,0 +1,166 @@
+
+ssj.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+fishDead
+  rotate: false
+  xy: 2, 2
+  size: 66, 42
+  orig: 66, 42
+  offset: 0, 0
+  index: -1
+flyDead
+  rotate: false
+  xy: 70, 11
+  size: 59, 33
+  orig: 59, 33
+  offset: 0, 0
+  index: -1
+houseDark
+  rotate: false
+  xy: 502, 166
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 0
+houseDark
+  rotate: false
+  xy: 574, 166
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 1
+houseDark
+  rotate: false
+  xy: 646, 166
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 2
+p2_jump
+  rotate: false
+  xy: 362, 46
+  size: 66, 94
+  orig: 66, 94
+  offset: 0, 0
+  index: 0
+p2_stand
+  rotate: false
+  xy: 434, 144
+  size: 66, 92
+  orig: 66, 92
+  offset: 0, 0
+  index: 0
+p2_walk
+  rotate: false
+  xy: 2, 142
+  size: 70, 94
+  orig: 70, 94
+  offset: 0, 0
+  index: 0
+p2_walk
+  rotate: false
+  xy: 2, 46
+  size: 70, 94
+  orig: 70, 94
+  offset: 0, 0
+  index: 1
+p2_walk
+  rotate: false
+  xy: 74, 142
+  size: 70, 94
+  orig: 70, 94
+  offset: 0, 0
+  index: 2
+p2_walk
+  rotate: false
+  xy: 74, 46
+  size: 70, 94
+  orig: 70, 94
+  offset: 0, 0
+  index: 3
+p2_walk
+  rotate: false
+  xy: 146, 142
+  size: 70, 94
+  orig: 70, 94
+  offset: 0, 0
+  index: 4
+p2_walk
+  rotate: false
+  xy: 146, 46
+  size: 70, 94
+  orig: 70, 94
+  offset: 0, 0
+  index: 5
+p2_walk
+  rotate: false
+  xy: 218, 142
+  size: 70, 94
+  orig: 70, 94
+  offset: 0, 0
+  index: 6
+p2_walk
+  rotate: false
+  xy: 218, 46
+  size: 70, 94
+  orig: 70, 94
+  offset: 0, 0
+  index: 7
+p2_walk
+  rotate: false
+  xy: 290, 142
+  size: 70, 94
+  orig: 70, 94
+  offset: 0, 0
+  index: 8
+p2_walk
+  rotate: false
+  xy: 290, 46
+  size: 70, 94
+  orig: 70, 94
+  offset: 0, 0
+  index: 9
+p2_walk
+  rotate: false
+  xy: 362, 142
+  size: 70, 94
+  orig: 70, 94
+  offset: 0, 0
+  index: 10
+platformStart
+  rotate: false
+  xy: 718, 166
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+platformEnd
+  rotate: false
+  xy: 790, 166
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+platform
+  rotate: false
+  xy: 862, 166
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 0
+platform
+  rotate: false
+  xy: 934, 166
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 1
+platform
+  rotate: false
+  xy: 502, 94
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 2
