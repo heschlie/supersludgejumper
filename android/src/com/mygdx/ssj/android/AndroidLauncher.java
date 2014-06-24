@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.mygdx.ssj.MainGame;
 import com.mygdx.ssj.SsjMain;
 
 public class AndroidLauncher extends AndroidApplication {
@@ -11,6 +12,6 @@ public class AndroidLauncher extends AndroidApplication {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new SsjMain(), config);
+		initialize(new MainGame(), config);
 	}
 }

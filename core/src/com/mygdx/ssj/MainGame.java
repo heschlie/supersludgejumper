@@ -14,12 +14,14 @@ public class MainGame extends Game {
     private Level level;
     public TextureAtlas atlas;
     public OrthographicCamera camera;
+    public float screenWidth = 15f;
+    public float screenHeight = screenWidth * 1.77f;
 
     @Override
     public void create() {
         atlas = new TextureAtlas(Gdx.files.internal("ssj.atlas"));
-        camera = new OrthographicCamera(10f, 10 * 1.77f);
-        camera.position.set(5f, (10 * 1.77f)/2f, 0);
+        camera = new OrthographicCamera(screenWidth, screenHeight);
+        camera.position.set(screenWidth / 2f, screenHeight / 2f, 0);
         camera.update();
         level = new Level(camera, atlas);
         setScreen(level);

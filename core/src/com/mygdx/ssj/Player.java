@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
@@ -30,10 +31,16 @@ public class Player extends Sprite {
     private TextureRegion jumpL;
     public Vector2 velocity = new Vector2();
     public float gravity = -9.5f;
-    public float terminalVelocity = -7f;
+    public float terminalVelocity = -10f;
+    private float maxSpeed = 5f;
     public boolean grounded = false;
+    public boolean goingUp = false;
     public movement movestate;
     private float time = 0f;
+
+    // Feet!
+    public Array<Rectangle> feet = new Array<Rectangle>(2);
+    public boolean[] feetTouching = {false, false};
 
     // Where are you facing
     public String left = "left";
@@ -57,12 +64,30 @@ public class Player extends Sprite {
         jumpL = new TextureRegion(atlas.findRegion("p2_jump"));
         jumpL.flip(true, false);
         setRegion(standR);
-        setPosition(5, 10);
+        setPosition(5, 1);
+        createFeet();
         movestate = movement.STOP;
+    }
+
+    public void createFeet() {
+        feet.add(new Rectangle(getX() + getWidth() * .15f, getY() - .5f, .05f, 1f));
+        feet.add(new Rectangle(getX() + getWidth() * .85f, getY() - .5f, .05f, 1f));
+    }
+
+    public void setFeet() {
+        feet.get(0).setPosition(getX() + getWidth() * .15f, getY() - .5f);
+        feet.get(1).setPosition(getX() + getWidth() * .85f, getY() - .5f);
     }
 
     public void update(float delta) {
         time += delta;
+        setFeet();
+
+        if (velocity.y > 0 && !goingUp) {
+            goingUp = true;
+        } else if (velocity.y <= 0 && goingUp){
+            goingUp = false;
+        }
 
         //player movement on keyboard for debugging
         movestate = movement.STOP;
@@ -73,7 +98,7 @@ public class Player extends Sprite {
             movestate = movement.RIGHT;
         }
         if (grounded && Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            velocity.y = 10;
+            velocity.y = 15f;
             grounded = false;
         }
 
@@ -109,10 +134,10 @@ public class Player extends Sprite {
         velocity.y += gravity * delta;
 
         if (velocity.y < terminalVelocity) velocity.y = terminalVelocity;
-        if (velocity.x > 4) velocity.x = 4;
-        else if (velocity.x < -4) velocity.x = -4;
+        if (velocity.x > maxSpeed) velocity.x = maxSpeed;
+        else if (velocity.x < -maxSpeed) velocity.x = -maxSpeed;
 
-        checkCollisions();
+        checkCollisions(delta);
 
         if (grounded) {
             velocity.y = 0f;
@@ -120,13 +145,34 @@ public class Player extends Sprite {
         setPosition(getX() + velocity.x * delta, getY() + velocity.y * delta);
     }
 
-    private void checkCollisions() {
+    private void checkCollisions(float delta) {
+
+        feetTouching[0] = false;
+        feetTouching[1] = false;
+        for (int i = 0; i < feetTouching.length && !feetTouching[0] && !feetTouching[1]; i++) {
+            for (Platform platform : level.platforms) {
+                if (feet.get(i).overlaps(platform.rect)) {
+                    feetTouching[i] = true;
+                    if (getY() > platform.rect.getY() + platform.rect.getHeight() && !goingUp &&
+                            getBoundingRectangle().setPosition(getX() + velocity.x * delta, getY() + velocity.y * delta).overlaps(platform.rect)) {
+                        setY(platform.rect.getY() + platform.rect.getHeight());
+                        grounded = true;
+                    }
+                    break;
+                }
+            }
+            if (!feetTouching[0] && !feetTouching[1]) {
+                grounded = false;
+            }
+        }
+
         if (getBoundingRectangle().overlaps(level.floor.rect) && getY() < 1) {
             setY(1);
             velocity.y = 0;
             grounded = true;
         }
 
+        // Keep the player on the screen
         if (getX() < 0) {
             setX(0);
         }

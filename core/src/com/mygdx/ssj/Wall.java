@@ -1,8 +1,7 @@
 package com.mygdx.ssj;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -10,7 +9,9 @@ import com.badlogic.gdx.utils.Array;
  */
 public class Wall extends Row {
 
-    public Wall(Array<AtlasRegion> regions) {
+    public Wall(Array<TextureRegion> regions, float screenWidth) {
+        super(screenWidth);
+        tiles = new Array<Tile>(MathUtils.ceil(screenWidth));
         this.regions = regions;
         createRow();
     }
